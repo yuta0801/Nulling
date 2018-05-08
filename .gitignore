@@ -3,7 +3,4 @@ node_modules/
 #テスト用
 test/
 #コンフィグ
-/config.json
 #サーバー・ユーザー データベース
-user/
-sevrer/
