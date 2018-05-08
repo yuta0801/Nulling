@@ -1,0 +1,21 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "rules": {
+        "arrow-parens": 2,
+        "dot-location": 2,
+        "no-alert": 2,
+        "no-const-assign": 2,
+        "no-lonely-if": 2,
+        "no-var": 2,
+        "one-var": 2,
+        "quotes": [
+            2,
+            "backtick"
+        ],
+        "semi": 2,
+        "indent": 2
+    }
+}

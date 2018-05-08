@@ -1,0 +1,32 @@
+{
+  "name": "nulling",
+  "version": "0.0.1",
+  "description": "Discord の多機能ボット",
+  "main": "index.js",
+  "dependencies": {
+    "bufferutil": "^3.0.5",
+    "discord.js": "^11.3.2",
+    "libsodium-wrappers": "^0.7.3",
+    "node-opus": "^0.3.0",
+    "opusscript": "0.0.6",
+    "uws": "^9.148.0",
+    "ytdl-core": "^0.20.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NULL-Coding/Nulling.git"
+  },
+  "keywords": [
+    "Discord"
+  ],
+  "author": "NULL Code JP",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NULL-Coding/Nulling/issues"
+  },
+  "homepage": "https://github.com/NULL-Coding/Nulling#readme"
+}

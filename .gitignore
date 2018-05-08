@@ -1,0 +1,4 @@
+#パッケージ
+node_modules/
+#テスト用
+test/
