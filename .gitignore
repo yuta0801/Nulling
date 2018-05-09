@@ -2,5 +2,6 @@
 node_modules/
 #テスト用
 test/
-#コンフィグ
 #サーバー・ユーザー データベース
+database/server
+database/user
