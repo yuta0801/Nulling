@@ -2,6 +2,7 @@
 node_modules/
 #テスト用
 test/
+#プライベートコンフィグ
 #サーバー・ユーザー データベース
 database/server
 database/user
