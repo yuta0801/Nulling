@@ -1,0 +1,37 @@
+{
+    "commands": {
+        "ping": {
+            "success": "Pong! Successfully check ping! (Exclude message creation speed, ping is updated each 30 seconds)\nPing: %s%1;ms\nThis message creation speed: %s%2;ms (This is relate response speed of Discord)"
+        },
+        "help": {
+            "title": "List of commands",
+            "tips": "If there are don't know about commands, Type \"help [Command Name]\" to can show command details.",
+            "categories": {
+                "bot": "Bot",
+                "utils": "Utilities"
+            },
+            "subcommand": "Sub command",
+            "details": {
+                "help": {
+                    "name": "",
+                    "description": "Show list of commands",
+                    "subcommands": {
+                        "cmdname": {
+                            "name": "CMDNAME",
+                            "description": "Show command details"
+                        }
+                    }
+                }
+            },
+            "qrcode": {
+                "imagelink": "Image link: ",
+                "success": "Successfully qrcode generate",
+                "error": {
+                    "one": "Please type character code (General code is UTF-8. But, some japanese device is recommend use Shift_JIS)",
+                    "two": "Invalid character code. Please type \"help qr code\" to check list of character codes.",
+                    "three": "Please type text want conversion to qr code (Email, URL etc...)"
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,0 @@
-{
-    "command": {
-        "ping": {
-            "success": "Pong! Successfully check ping! Bot's ping is %s%pingms!"
-        }
-    }
-}

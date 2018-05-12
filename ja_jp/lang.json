@@ -1,7 +1,0 @@
-{
-    "command": {
-        "ping": {
-            "success": "ポン！ Ping の確認に成功しました！ボットの Ping は %s%pingms です！"
-        }
-    }
-}
