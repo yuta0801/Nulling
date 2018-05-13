@@ -6,14 +6,18 @@
         "help": {
             "title": "List of commands",
             "tips": "If there are don't know about commands, Type \"help [Command Name]\" to can show command details.",
+            "subcommand": "Sub command",
+            "charactercodes": "List of character codes",
+            "optional": "Optional",
+            "nonoptional": "Non optional",
+            "none": "None",
             "categories": {
                 "bot": "Bot",
                 "utils": "Utilities"
             },
-            "subcommand": "Sub command",
             "details": {
                 "help": {
-                    "name": "",
+                    "name": "IPA: hɛlp",
                     "description": "Show list of commands",
                     "subcommands": {
                         "cmdname": {
@@ -21,16 +25,34 @@
                             "description": "Show command details"
                         }
                     }
+                },
+                "ping": {
+                    "ping": "IPA: pɪŋ",
+                    "description": "Show ping of bot. Ping is ms unit response speed express. So, if ping is lower, faster response speed."
+                },
+                "qrcode": {
+                    "name": "IPA: QRCode",
+                    "description": "Generate qrcode",
+                    "subcommands": {
+                        "charactercode": {
+                            "name": "Character Code",
+                            "description": "Character code of qrcode"
+                        },
+                        "string": {
+                            "name": "String",
+                            "description": "Text of qrcode (if it's a text, So, can anything)"
+                        }
+                    }
                 }
-            },
-            "qrcode": {
-                "imagelink": "Image link: ",
-                "success": "Successfully qrcode generate",
-                "error": {
-                    "one": "Please type character code (General code is UTF-8. But, some japanese device is recommend use Shift_JIS)",
-                    "two": "Invalid character code. Please type \"help qr code\" to check list of character codes.",
-                    "three": "Please type text want conversion to qr code (Email, URL etc...)"
-                }
+            }
+        },
+        "qrcode": {
+            "imagelink": "Image link",
+            "success": "Successfully qrcode generate",
+            "error": {
+                "one": "Please type character code (General code is UTF-8. But, some japanese device is recommend use Shift_JIS)",
+                "two": "Invalid character code. Please type \"help qr code\" to check list of character codes.",
+                "three": "Please type text want conversion to qr code (if it's a text, So, can anything)"
             }
         }
     }

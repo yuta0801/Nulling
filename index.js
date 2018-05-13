@@ -19,7 +19,7 @@ const Discord = require(`discord.js`),
         }
     },
 
-    l = Language.ja_jp.main,
+    commands = Language.ja_jp.main.commands,
 
     StatusMessage = [
         `Developed by NULL Code JP#6593`,
@@ -132,7 +132,7 @@ Client.on(`ready`, () => {
 
     if (s[0] === `ping`) {
 
-        sendMessage(m, Message.Text, l.commands.ping.success, Ping, Date.now() - m.createdTimestamp);
+        sendMessage(m, Message.Text, commands.ping.success, Ping, Date.now() - m.createdTimestamp);
 
     } else if (s[0] === `help`) {
 
@@ -140,10 +140,33 @@ Client.on(`ready`, () => {
 
             m.channel.send(
                 new Discord.RichEmbed()
-                    .setTitle(`help (${l.commands.help.details.help.name})`)
+                    .setTitle(`help (${commands.help.details.help.name})`)
                     .setAuthor(`@${m.author.tag}`, m.author.avatarURL)
-                    .setDescription(l.commands.help.details.help.description)
-                    .addField(l.commands.help.subcommand, `-help [${l.commands.help.details.help.subcommands.cmdname.name}]: ${l.commands.help.details.help.subcommands.cmdname.description}`)
+                    .setDescription(commands.help.details.help.description)
+                    .addField(commands.help.subcommand, `\`help **[${commands.help.details.help.subcommands.cmdname.name}]**\`: ${commands.help.details.help.subcommands.cmdname.description} (${commands.help.optional})`)
+                    .setColor(`#FFFFFF`)
+            );
+
+        } else if (s[1] === `ping`) {
+
+            m.channel.send(
+                new Discord.RichEmbed()
+                    .setTitle(`ping (${commands.help.details.ping.name})`)
+                    .setAuthor(`@${m.author.tag}`, m.author.avatarURL)
+                    .setDescription(commands.help.details.ping.description)
+                    .addField(commands.help.subcommand, commands.help.none)
+                    .setColor(`#FFFFFF`)
+            );
+
+        } else if (s[1] === `qrcode`) {
+
+            m.channel.send(
+                new Discord.RichEmbed()
+                    .setTitle(`ping (${commands.help.details.qrcode.name})`)
+                    .setAuthor(`@${m.author.tag}`, m.author.avatarURL)
+                    .setDescription(commands.help.details.qrcode.description)
+                    .addField(commands.help.subcommand, `\`qrcode **[${commands.help.details.qrcode.subcommands.charactercode.name}]**\`: ${commands.help.details.qrcode.subcommands.charactercode.description} (${commands.help.nonoptional})\n\`qrcode [${commands.help.details.qrcode.subcommands.charactercode.name}] **[${commands.help.details.qrcode.subcommands.string.name}]**\`: ${commands.help.details.qrcode.subcommands.string.description} (${commands.help.nonoptional})`)
+                    .addField(commands.help.charactercodes, `\`UTF-8\` \`Shift_JIS\` \`ISO-8859-1\``)
                     .setColor(`#FFFFFF`)
             );
 
@@ -151,11 +174,11 @@ Client.on(`ready`, () => {
 
             m.channel.send(
                 new Discord.RichEmbed()
-                    .setTitle(l.commands.help.title)
+                    .setTitle(commands.help.title)
                     .setAuthor(`@${m.author.tag}`, m.author.avatarURL)
-                    .setDescription(l.commands.help.tips)
-                    .addField(l.commands.help.categories.bot, `\`help\` \`ping\``, true)
-                    .addField(l.commands.help.categories.utils, `\`qrcode\``, true)
+                    .setDescription(commands.help.tips)
+                    .addField(commands.help.categories.bot, `\`help\` \`ping\``, true)
+                    .addField(commands.help.categories.utils, `\`qrcode\``, true)
                     .setColor(`#FFFFFF`)
             );
 
@@ -168,25 +191,25 @@ Client.on(`ready`, () => {
             if (s[1] === `UTF-8` || s[1] === `Shift_JIS` || s[1] === `ISO-8859-1`) {
 
             } else {
-                sendMessage(m, Message.Text, l.commands.qrcode.error.two);
+                sendMessage(m, Message.Text, commands.qrcode.error.two);
             }
             if (s[2]) {
 
                 m.channel.send(
                     new Discord.RichEmbed()
-                        .setTitle(l.commands.qrcode.success)
+                        .setTitle(commands.qrcode.success)
                         .setAuthor(`@${m.author.tag}`, m.author.avatarURL)
-                        .setDescription(`${l.commands.qrcode.imagelink}https://chart.apis.google.com/chart?cht=qr&chs=547x547&chl=${s[2]}&choe=${s[1]}&chld=H|1`)
+                        .setDescription(`${commands.qrcode.imagelink}: https://chart.apis.google.com/chart?cht=qr&chs=547x547&chl=${s[2]}&choe=${s[1]}&chld=H|1`)
                         .setImage(`https://chart.apis.google.com/chart?cht=qr&chs=547x547&chl=${s[2]}&choe=${s[1]}&chld=H|1`)
                         .setColor(`#FFFFFF`)
                 );
 
             } else {
-                sendMessage(m, Message.Text, l.commands.qrcode.error.three);
+                sendMessage(m, Message.Text, commands.qrcode.error.three);
             }
 
         } else {
-            sendMessage(m, Message.Text, l.commands.qrcode.error.one);
+            sendMessage(m, Message.Text, commands.qrcode.error.one);
         }
     }
 

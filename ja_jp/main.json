@@ -7,6 +7,10 @@
             "title": "コマンド一覧",
             "tips": "もしコマンドについてわからないことがある場合、「help [コマンド名]」でコマンドの詳細を表示できます",
             "subcommand": "サブコマンド",
+            "charactercodes": "文字コード一覧",
+            "optional": "省略可",
+            "nonoptional": "省略不可",
+            "none": "なし",
             "categories": {
                 "bot": "ボット",
                 "utils": "便利機能"
@@ -21,16 +25,34 @@
                             "description": "指定コマンドの詳細情報を表示します"
                         }
                     }
+                },
+                "ping": {
+                    "name": "ピン",
+                    "description": "ボットの Ping (通信速度)を表示します。Ping は応答速度を ms (ミリ秒)で表しており、低いほど応答速度が速いことを示しています。"
+                },
+                "qrcode": {
+                    "name": "キューアールコード",
+                    "description": "QRCode を生成します",
+                    "subcommands": {
+                        "charactercode": {
+                            "name": "文字コード",
+                            "description": "QRCode の文字コードを指定します"
+                        },
+                        "string": {
+                            "name": "文字",
+                            "description": "QRCode 化する文字を指定します（文字であればどんなものでも可）"
+                        }
+                    }
                 }
             }
         },
         "qrcode": {
-            "imagelink": "画像のリンク：",
+            "imagelink": "画像のリンク",
             "success": "QRCode の生成に成功しました",
             "error": {
                 "one": "文字コードを入力してください（一般的なのは UTF-8 ですが、携帯電話（ガラケー等）は UTF-8 でも可能ですが、一部対応してない端末があるため Shift_JIS にすることをお勧めします）",
                 "two": "無効な文字コードです。「help qrcode」で対応している文字コード一覧を確認してください",
-                "three": "QRCode 化したい文字を入力してください（メールアドレス、 URL 等でも可能）"
+                "three": "QRCode 化したい文字を入力してください（文字であればどんなものでも可）"
             }
         }
     }
