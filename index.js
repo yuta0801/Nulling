@@ -40,15 +40,15 @@ const Discord = require(`discord.js`),
         Missing: `Missing`,
         Invalid: `Invalid`,
         Match: `Match`,
-        Record: (Function, Type, Content, Stack) => {
+        Record: (Name, Type, Content, Stack) => {
             if (Type === `Missing`) {
-                console.error(`\u001b[31m関数「${Function}」でエラーが発生しました：引数「${Content}」が足りません\u001b[0m\nエラーの発生源：${Stack}`);
+                console.error(`\u001b[31m[エラー] 関数「${Name}」でエラーが発生しました：引数「${Content}」が足りません\u001b[0m\nエラーの発生源：${Stack}`);
             } else if (Type === `Invalid`) {
-                console.error(`\u001b[31m関数「${Function}」でエラーが発生しました：引数「${Content}」が無効です\u001b[0m\nエラーの発生源：${Stack}`);
+                console.error(`\u001b[31m[エラー] 関数「${Name}」でエラーが発生しました：引数「${Content}」が無効です\u001b[0m\nエラーの発生源：${Stack}`);
             } else if (Type === `Invalid`) {
-                console.error(`\u001b[31m関数「${Function}」でエラーが発生しました：引数「${Content}」が一致しません\u001b[0m\nエラーの発生源：${Stack}`);
+                console.error(`\u001b[31m[エラー] 関数「${Name}」でエラーが発生しました：引数「${Content}」が一致しません\u001b[0m\nエラーの発生源：${Stack}`);
             } else {
-                console.error(`\u001b[31m関数 Problem.Record でエラーが発生しました：引数 Type が無効です\u001b[0m\nエラーの発生源：${CallStack()}`);
+                console.error(`\u001b[31m[エラー] 関数 Problem.Record でエラーが発生しました：引数 Type が無効です\u001b[0m\nエラーの発生源：${CallStack()}`);
             }
         }
     },
@@ -117,11 +117,11 @@ let Status = 0,
 Client.on(`ready`, () => {
 
     if (Disconnected) {
-        console.log(`再接続に成功しました`);
+        console.log(`[ボット] 再接続に成功しました`);
     }
     Client.user.setActivity(`WINNER WINNER CHICKEN DINNER!`, { type: `STREAMING` });
 
-    console.log(`ボットが安定するまで待機しています...\n`);
+    console.log(`[ボット] ボットが安定するまで待機しています...\n`);
 
     setTimeout(() => {
         Launched = true;
@@ -131,7 +131,7 @@ Client.on(`ready`, () => {
     setInterval(() => {
         Status = StatusMessage[Math.floor(Math.random() * StatusMessage.length)];
         Client.user.setActivity(Status, { type: `STREAMING` });
-        console.log(`ステータスメッセージを更新しました: ${Status}`);
+        console.log(`[ボット] ステータスメッセージを更新しました: ${Status}`);
     }, 30000);
 
 }).on(`message`, (m) => {
@@ -142,7 +142,7 @@ Client.on(`ready`, () => {
 
     if (m.author.bot) return;
 
-    console.log(`${m.author.tag} is say "${m.content}" on ${m.guild.name}`);
+    console.log(`[ログ] ${m.author.tag} is say "${m.content}" on ${m.guild.name}`);
 
     const s = m.content.slice(Prefix.length).split(` `);
 
@@ -307,7 +307,7 @@ Client.on(`ready`, () => {
                                         if (b.status_txt === `INVALID_ARG_ACCESS_TOKEN`) {
                                             Problem.Record(`Request - Bitly`, Problem.Invalid, `アクセストークン`, CallStack());
                                             sendMessage(m, Message.Text, code_error.message.unknown, `${code_error.code}: ${b.status_code}\n${code_error.content}: ${b.status_txt}\n${code_error.result}: ${b.data}\nJSON${code_error.json}: ${JSON.stringify(b)}`);
-                                            console.log(b);
+                                            console.log(`[エラー] ${b}`);
                                         }
                                         if (b.status_txt === `INVALID_URI`) {
                                             sendMessage(m, Message.Text, commands.bitly.error.two, m.content.slice(s[0].length + 2));
@@ -450,11 +450,11 @@ Client.on(`ready`, () => {
     });
 
 }).on(`disconnect`, (m) => {
-    console.log(`Discord との接続が切断されました`);
+    console.log(`[ボット] Discord との接続が切断されました`);
     Disconnected = true;
 
 }).on(`reconnecting`, (m) => {
-    console.log(`再接続を試みています...`);
+    console.log(`[ボット] 再接続を試みています...`);
     Disconnected = true;
 });
 
