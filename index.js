@@ -24,29 +24,6 @@ const Discord = require(`discord.js`),
     code_error = Language.ja_jp.main.code_error,
 
     StatusMessage = [
-        /*`Developed by NULL Code JP#6593`,
-        `Type "-help" to show help`,
-        `Today is ${[`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`][new Date().getDay()]}.`,
-        `"Hello" in Japanese is "こんにちは"`,
-        `This is a pen`,
-        `WINNER WINNER CHICKEN DINNER!`,
-        `我現在很累`,
-        `ง่วงนอน...`,
-        `Ich bin jetzt live.`,
-        `Uhh... I can't think status messages.`,
-        `あいうえお`,
-        `Can you see me?`,
-        `I'm using Firefox.`,
-        `https://djs-jpn.ga`,
-        `This status message is random`,
-        `元気？`,
-        `Nulling is open source!`,
-        `Pls check "about" command!`,
-        `Send request to "NULL Code JP#6593" to can be friend me!`,
-        `¡Hola!`,
-        `ʞouu!cµ!ʍɐ`,
-        `我的世界是很有趣`,
-        `This bot is running on Node.JS`*/
         `WINNER WINNER CHICKEN DINNER!`,
         `大吉大利，晚上吃鸡!`,
         `이겼닭! 오늘 저녁은 치킨이닭!`,
@@ -59,7 +36,7 @@ const Discord = require(`discord.js`),
         `勝った！勝った！夕飯はドン勝だ！！`
     ],
 
-    Error = {
+    Problem = {
         Missing: `Missing`,
         Invalid: `Invalid`,
         Match: `Match`,
@@ -71,7 +48,7 @@ const Discord = require(`discord.js`),
             } else if (Type === `Invalid`) {
                 console.error(`\u001b[31m関数「${Function}」でエラーが発生しました：引数「${Content}」が一致しません\u001b[0m\nエラーの発生源：${Stack}`);
             } else {
-                console.error(`\u001b[31m関数 Error.Record でエラーが発生しました：引数 Type が無効です\u001b[0m\nエラーの発生源：${CallStack()}`);
+                console.error(`\u001b[31m関数 Problem.Record でエラーが発生しました：引数 Type が無効です\u001b[0m\nエラーの発生源：${CallStack()}`);
             }
         }
     },
@@ -97,17 +74,17 @@ const Discord = require(`discord.js`),
                         .setColor(`#7289da`)
                 );
             } else {
-                Error.Record(`sendMessage`, Error.Invalid, `Type`, CallStack());
+                Problem.Record(`sendMessage`, Problem.Invalid, `Type`, CallStack());
             }
         } else {
             if (!Message) {
-                Error.Record(`sendMessage`, Error.Missing, `Message`, CallStack());
+                Problem.Record(`sendMessage`, Problem.Missing, `Message`, CallStack());
             }
             if (!Type) {
-                Error.Record(`sendMessage`, Error.Missing, `Type`, CallStack());
+                Problem.Record(`sendMessage`, Problem.Missing, `Type`, CallStack());
             }
             if (!DataCode) {
-                Error.Record(`sendMessage`, Error.Missing, `DataCode`, CallStack());
+                Problem.Record(`sendMessage`, Problem.Missing, `DataCode`, CallStack());
             }
         }
     },
@@ -119,8 +96,8 @@ const Discord = require(`discord.js`),
     CallStack = () => {
         try {
             throw new Error(`Dummy`);
-        } catch (Content) {
-            return Content.stack.split(`\n`)[3].split(`(`)[1].replace(`)`, ``);
+        } catch (content) {
+            return content.stack.split(`\n`)[2].split(`(`)[1].replace(`)`, ``);
         }
     },
 
@@ -142,7 +119,7 @@ Client.on(`ready`, () => {
     if (Disconnected) {
         console.log(`再接続に成功しました`);
     }
-    Client.user.setActivity(/*`Developed by NULL Code JP#6593`*/`WINNER WINNER CHICKEN DINNER!`, { type: `STREAMING` });
+    Client.user.setActivity(`WINNER WINNER CHICKEN DINNER!`, { type: `STREAMING` });
 
     console.log(`ボットが安定するまで待機しています...\n`);
 
@@ -328,7 +305,7 @@ Client.on(`ready`, () => {
                                 }, (e, r, b) => {
                                     if (b.status_code === 500) {
                                         if (b.status_txt === `INVALID_ARG_ACCESS_TOKEN`) {
-                                            Error.Record(`Request - Bitly`, Error.Invalid, `アクセストークン`, CallStack());
+                                            Problem.Record(`Request - Bitly`, Problem.Invalid, `アクセストークン`, CallStack());
                                             sendMessage(m, Message.Text, code_error.message.unknown, `${code_error.code}: ${b.status_code}\n${code_error.content}: ${b.status_txt}\n${code_error.result}: ${b.data}\nJSON${code_error.json}: ${JSON.stringify(b)}`);
                                             console.log(b);
                                         }
@@ -339,10 +316,10 @@ Client.on(`ready`, () => {
                                         if (b.status_txt === `OK`) {
                                             sendMessage(m, Message.Text, commands.bitly.success, m.content.slice(s[0].length + 2), `https://bit.ly/${b.data.hash}`);
                                         } else {
-                                            Error.Record(`Request - Bitly`, Error.Invalid, `応答メッセージ`, CallStack());
+                                            Problem.Record(`Request - Bitly`, Problem.Invalid, `応答メッセージ`, CallStack());
                                         }
                                     } else {
-                                        Error.Record(`Request - Bitly`, Error.Invalid, `応答コード`, CallStack());
+                                        Problem.Record(`Request - Bitly`, Problem.Invalid, `応答コード`, CallStack());
                                     }
                                 });
                             });
