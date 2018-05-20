@@ -1,84 +1,81 @@
 {
-    "code_error": {
-        "code": "エラーコード",
-        "content": "エラー内容",
-        "result": "データ取得の結果",
-        "json": "（上級者向け）",
-        "message": {
-            "unknown": "予期せぬ内部エラーが発生しました。このエラーは自動的に送信されます。今しばらくお待ちください\n---送信される情報---\n%s%1;"
-        }
-    },
-    "commands": {
-        "ping": {
-            "success": "ポン！ Ping の確認に成功しました！\nPing: %s%1;ms\nメッセージの作成速度: %s%2;ms（これは Discord の応答速度も関係します）"
-        },
-        "help": {
-            "title": "コマンド一覧",
-            "tips": "もしコマンドについてわからないことがある場合、「help [コマンド名]」でコマンドの詳細を表示できます",
-            "subcommand": "サブコマンド",
-            "charactercodes": "文字コード一覧",
-            "optional": "省略可",
-            "nonoptional": "省略不可",
-            "none": "なし",
-            "categories": {
-                "bot": "ボット",
-                "utils": "便利機能",
-                "shorturl": "URL 短縮"
-            },
-            "details": {
-                "help": {
-                    "name": "ヘルプ",
-                    "description": "コマンド一覧を表示します",
-                    "subcommands": {
-                        "cmdname": {
-                            "name": "コマンド名",
-                            "description": "指定コマンドの詳細情報を表示します"
-                        }
-                    }
-                },
-                "ping": {
-                    "name": "ピン",
-                    "description": "ボットの Ping (通信速度)を表示します。Ping は応答速度は応答速度を ms (ミリ秒)で表しており、低いほど応答速度が速いことを示しています"
-                },
-                "qrcode": {
-                    "name": "キューアールコード",
-                    "description": "QRCode を生成します",
-                    "subcommands": {
-                        "charactercode": {
-                            "name": "文字コード",
-                            "description": "QRCode の文字コードを指定します"
-                        },
-                        "string": {
-                            "name": "文字",
-                            "description": "QRCode 化する文字を指定します（文字であればどんなものでも可）"
-                        }
-                    }
-                }
-            }
-        },
-        "qrcode": {
-            "imagelink": "画像のリンク",
-            "success": "QRCode の生成に成功しました",
-            "tips": "（一般的なのは UTF-8 ですが、携帯電話（ガラケー等）は UTF-8 でも可能ですが、一部対応してない端末があるため Shift_JIS にすることをお勧めします）",
-            "error": {
-                "one": "文字コードを入力してください",
-                "two": "無効な文字コードです。「help qrcode」で対応している文字コード一覧を確認してください",
-                "three": "QRCode 化したい文字を入力してください（文字であればどんなものでも可）"
-            }
-        },
-        "invite": {
-            "bot": "このリンクからボットを招待することができます",
-            "note": "\n注意！招待時に必ず管理者権限を付けてください！",
-            "group": "ボットに関しての質問、提案がありますか？是非ともこちらのサーバーにご参加ください！"
-        },
-        "bitly": {
-            "success": "URL 「 %s%1; 」の短縮に成功しました。短縮された URL は「 %s%2; 」です",
-            "error": {
-                "one": "短縮したい URL を入力してください",
-                "two": "URL 「%s%1;」は無効です（URL に https:// または http:// を入れないでください）",
-                "three": "URL 「%s%1;」は充分短くなっています（１５文字またはそれ以上でお願いします）",
-                "four": "短縮 URL を重ねることはできません"
-            }
-        }
-    }
+    "log.log": "[ログ]",
+    "log.bot": "[ボット]",
+    "log.error": "[エラー]",
+    "log.rcode": "応答コード",
+    "log.rmsg": "応答メッセージ",
+    "log.acc": "アクセストークン",
+    "log.did": "Discord との接続が切断されました",
+    "log.reg": "再接続を試みています...",
+    "log.red": "再接続に成功しました",
+    "log.waiting": "ボットが安定するまで待機しています...",
+    "log.logg": "ログインに成功しました",
+    "log.discord": "Discord のトークン：",
+    "log.tag": "タグ：",
+    "log.id": "ＩＤ：",
+    "log.ping": "ＰＩＮＧ：",
+    "log.updsts": "ステータスメッセージを更新しました：",
+    "log.say": "%s%1; が %s%2; で「%s%3;」と発言しました",
+    "scan.prog": "<@%s%1;> の送信したＵＲＬをスキャンしています。スキャンが終わるまでリンクをクリックしないことをお勧めします",
+    "scan.mal": "<@%s%1;> の送信したＵＲＬにマルウェアが含まれていたため、削除しました",
+    "scan.err": "<@%s%1;> の送信したＵＲＬのスキャンを試みましたが、データベースから見つからなかったため、スキャンできませんでした",
+    "scan.safe": "<@%s%1;> の送信したＵＲＬ「 %s%2; 」は安全です",
+    "error.code": "エラーコード：",
+    "error.content": "エラー内容：",
+    "error.result": "データ取得の結果：",
+    "error.json": "（上級者向け）：",
+    "error.missing": "「%s%1;」でエラーが発生しました：「%s%2;」が足りません\u001b[0m\nエラーの発生源：%s%3;",
+    "error.invalid": "「%s%1;」でエラーが発生しました：「%s%2;」が無効です\u001b[0m\nエラーの発生源：%s%3;",
+    "error.match": "「%s%1;」でエラーが発生しました：「%s%2;」が一致しません\u001b[0m\nエラーの発生源：%s%3;",
+    "error.msg.0": "予期せぬ内部エラーが発生しました。このエラーは自動的に送信されます。しばらくお待ちください\n---送信される情報---\n%s%1;",
+    "error.msg.1": "短縮したいＵＲＬを入力してください",
+    "error.msg.2": "ＵＲＬ「 %s%1; 」は無効です（ＵＲＬに https:// または http:// を入れないでください）",
+    "error.msg.3": "ＵＲＬ「 %s%1; 」は充分短くなっています（１５文字またはそれ以上でお願いします）",
+    "error.msg.4": "短縮ＵＲＬを重ねることはできません",
+    "error.msg.5": "文字コードを入力してください（詳しくは「help qrcode」）",
+    "error.msg.6": "無効な文字コードです。「help qrcode」で対応している文字コード一覧を確認してください",
+    "error.msg.7": "QR コード化したい文字を入力してください（文字であればどんなものでも可）",
+    "error.msg.8": "ＵＲＬをスキャンしようとしましたがデータベースが見つからなかったため、 Google Safebrowsing のスキャン結果だけとなります",
+    "error.msg.9": "スキャンしたいＵＲＬを入力してください",
+    "reply.compact": "コンパクトモード使ってるでしょ",
+    "reply.disboard": "下げました:thumbsup:",
+    "command.ping.success": "ポン！ Ping の確認に成功しました！\nPing：%s%1;ms\nメッセージの作成速度：%s%2;ms（これは Discord の応答速度も関係します）",
+    "command.help.title": "コマンド一覧",
+    "command.help.tip": "もしコマンドについてわからないことがある場合、「help [コマンド名]」でコマンドの詳細を表示できます",
+    "command.help.sub": "サブコマンド",
+    "command.help.encode": "エンコード一覧",
+    "command.help.optional": "省略可",
+    "command.help.nonoptional": "省略不可",
+    "command.help.none": "なし",
+    "command.help.category.bot": "ボット",
+    "command.help.category.util": "便利機能",
+    "command.help.category.shorturl": "ＵＲＬ短縮",
+    "command.help.category.security": "セキュリティ",
+    "command.help.help.desc": "コマンド一覧を表示します",
+    "command.help.help.sub.name.name": "コマンド名",
+    "command.help.help.sub.name.desc": "指定コマンドの詳細情報を表示します",
+    "command.help.ping.desc": "ボットの Ping (通信速度)を表示します。Ping は応答速度は応答速度を ms (ミリ秒)で表されています",
+    "command.help.qrcode.desc": "Google Charts API を使用して、 QR コードを生成します",
+    "command.help.qrcode.sub.encode.name": "エンコード",
+    "command.help.qrcode.sub.encode.desc": "QR コードのエンコードを指定します",
+    "command.help.qrcode.sub.text.name": "テキスト",
+    "command.help.qrcode.sub.text.desc": "QR コード化する文字を指定します（文字であればどんなものでも可）",
+    "command.help.qrcode.sub.encode.utf8": "一般的にはこのエンコードを使用し、ほとんどの端末に対応しています",
+    "command.qrcode.imagelink": "画像のリンク：",
+    "command.qrcode.success": "QR コードの生成に成功しました",
+    "command.invite.bot": "下記のリンクからボットを招待することができます",
+    "command.invite.note": "\n注意！招待時に必ず管理者権限を付けてください！",
+    "command.invite.group": "ボットに関しての質問、提案がありますか？是非ともこちらのサーバーにご参加ください！",
+    "command.bitly.success": "ＵＲＬ「 %s%1; 」の短縮に成功しました。短縮されたＵＲＬは「 %s%2; 」です",
+    "command.scan.result": "スキャン結果",
+    "command.scan.success": "<@%s%1;> の DM にスキャン結果を送信しました。DM をご確認ください。",
+    "command.scan.engr": "合計 %s%1;個のエンジンが脅威を検出しました",
+    "command.scan.tip": "以下は一部のエンジンのスキャン結果です",
+    "command.scan.url": "ＵＲＬ：",
+    "command.scan.old": "（旧）",
+    "command.scan.n": "未検出",
+    "command.scan.m": "マルウェア",
+    "command.scan.p": "フィッシング",
+    "command.scan.s": "怪しい動作",
+    "command.scan.u": "不明"
 }
