@@ -1,9 +1,9 @@
 "use strict";
 
-const Client = new Discord.Client(),
+const Discord = require(`discord.js`),
+    Client = new Discord.Client(),
     Config = require(`./config/private.json`),
     Developers = [`379918962668077060`],
-    Discord = require(`discord.js`),
     Prefix = `-`,
     Request = require(`request`),
     StatusMessage = [`WINNER WINNER CHICKEN DINNER!`, `大吉大利，晚上吃鸡!`, `이겼닭! 오늘 저녁은 치킨이닭!`, `GEWINNER GEWINNER HUHNCHEN-DINNER!`, `MECZYK WYGRANY, KURCZAK PODANY!`, `Grande Vitória!`, `ПОБЕДА-ПОБЕДА ВМЕСТО ОБЕДА!`, `HADİ İYİSİN! ÇORBA PARASI ÇIKTI 🙂`, `ฉนะ!กินฉลองกัน!`, `勝った！勝った！夕飯はドン勝だ！！`],
@@ -431,6 +431,7 @@ Client.on(`ready`, () => {
                             .addField(g(`command.guild.large`), m.guild.large ? g(`command.guild.large.yes`) : !m.guild.large ? g(`command.guild.large.no`) : g(`command.guild.large.unknown`), true)
                             .addField(g(`command.guild.afkTime`), g(`command.guild.afkTime.time`, m.guild.afkTimeout / 60, m.guild.afkTimeout), true)
                             .addField(g(`command.guild.available`), m.guild.available ? g(`command.guild.available.yes`) : !m.guild.available ? g(`command.guild.available.no`) : g(`command.guild.available.unknown`), true)
+                            .addField(g(`command.guild.verified`), g(`comingsoon`), true)
                             .addField(g(`command.guild.verif`), m.guild.verificationLevel === 0 ? g(`command.guild.verif.none`) + g(`command.guild.verif.none.desc`) : m.guild.verificationLevel === 1 ? g(`command.guild.verif.low`) + g(`command.guild.verif.low.desc`) : m.guild.verificationLevel === 2 ? g(`command.guild.verif.medium`) + g(`command.guild.verif.medium.desc`) : m.guild.verificationLevel === 3 ? g(`command.guild.verif.high`) + g(`command.guild.verif.high.desc`) : m.guild.verificationLevel === 4 ? g(`command.guild.verif.very_high`) + g(`command.guild.verif.very_high.desc`) : g(`command.guild.verif.unknown`))
                             .addField(g(`command.guild.filter`), m.guild.explicitContentFilter === 0 ? g(`command.guild.filter.none`) + g(`command.guild.filter.none.desc`) : m.guild.explicitContentFilter === 1 ? g(`command.guild.filter.medium`) + g(`command.guild.filter.medium.desc`) : m.guild.explicitContentFilter === 2 ? g(`command.guild.filter.high`) + g(`command.guild.filter.high.desc`) : g(`command.guild.filter.unknown`))
                             .addField(g(`command.guild.afk`), m.guild.afkChannel + g(`command.guild.afk.id`, m.guild.afkChannelID))
@@ -438,8 +439,10 @@ Client.on(`ready`, () => {
                             .addField(g(`command.guild.owner`), m.guild.owner + g(`command.guild.owner.id`, m.guild.ownerID))
                             .addField(g(`command.guild.created`), m.guild.createdAt)
                             .addField(g(`command.guild.joined`), m.guild.joinedAt)
-                            .addField(g(`command.guild.icon`), m.guild.iconURL)
-                            .addField(g(`command.guild.hash`), m.guild.icon));
+                            .addField(g(`command.guild.icon`), m.guild.iconURL ? m.guild.iconURL : g(`command.guild.icon.none`))
+                            .addField(g(`command.guild.hash`), m.guild.icon ? m.guild.icon : g(`command.guild.hash.none`))
+                            .addField(g(`command.guild.splash`), m.guild.splashURL ? m.guild.splashURL : g(`command.guild.splash.none`))
+                            .addField(g(`command.guild.hash2`), m.guild.splash ? m.guild.splash : g(`command.guild.hash2.none`)));
 
                 } else if (s[0] === `testmode`) {
 
