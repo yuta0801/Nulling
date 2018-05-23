@@ -65,6 +65,17 @@ const Discord = require(`discord.js`),
         URL: /(https?:\/\/[^\s]+)/g
     },
     is = {
+        Admin: (Message) => {
+
+            if (Message.member.hasPermission(`ADMINISTRATOR`)) {
+
+                return true;
+
+            }
+            return false;
+
+        },
+
         Developer: (Message) => {
 
             if (Developers.includes(Message.author.id)) {
@@ -91,7 +102,8 @@ const Discord = require(`discord.js`),
     },
     DetectURL = (c) => c.match(Rexp.URL),
     Lower = (string) => string.toLowerCase(),
-    g = (Code, AttData, AttData2, AttData3, AttData4, AttData5) => Language.ja_jp.main[Code].replace(`%s%1;`, AttData).replace(`%s%2;`, AttData2).replace(`%s%3;`, AttData3).replace(`%s%4;`, AttData4).replace(`%s%5;`, AttData5);
+    g = (Code, AttData, AttData2, AttData3, AttData4, AttData5) => Language.ja_jp.main[Code].replace(`%s%1;`, AttData).replace(`%s%2;`, AttData2).replace(`%s%3;`, AttData3).replace(`%s%4;`, AttData4).replace(`%s%5;`, AttData5),
+    Log = false;
 
 let Disconnected = false,
     Launched = false,
@@ -128,7 +140,21 @@ Client.on(`ready`, () => {
 
     if (!Launched) return;
     if (m.author.id === Client.user.id) return;
-    console.log(`${g(`log.log`)} ${g(`log.say`, m.author.tag, m.guild.name, m.channel.name, m.content)}`);
+    if (Log) {
+
+        if (m.content !== ``) {
+
+            console.log(`${g(`log.log`)} ${g(`log.say`, m.author.bot ? `ボット` : ``, m.author.tag, m.guild.name, m.channel.name, m.content)}`);
+
+        } else {
+
+            console.log(`${g(`log.log`)} ${g(`log.embed`, m.author.bot ? `ボット` : ``, m.author.tag, m.guild.name, m.channel.name)}`);
+
+            console.log(m.embeds);
+
+        }
+
+    }
     if (m.channel.type === `dm`) return;
     if (TestMode && !is.Developer(m)) return;
     if (m.author.bot) return;
@@ -197,9 +223,21 @@ Client.on(`ready`, () => {
 
                         m.channel.send(new Discord.RichEmbed().setTitle(`qrcode`).setAuthor(`@${m.author.tag}`, m.author.avatarURL).setDescription(g(`command.help.qrcode.desc`)).addField(g(`command.help.sub`), `\`qrcode **[${g(`command.help.qrcode.sub.encode.name`)}]**\`: ${g(`command.help.qrcode.sub.encode.desc`)} (${g(`command.help.nonoptional`)})\n\`qrcode [${`command.help.qrcode.sub.encode.name`}] **[${g(`command.help.qrcode.sub.text.name`)}]**\`: ${g(`command.help.qrcode.sub.text.desc`)} (${g(`command.help.nonoptional`)})`).addField(g(`command.help.encode`), `\`UTF-8\` \`Shift_JIS\` \`ISO-8859-1\``).setColor(`#7289da`));
 
-                    } else if (s[1] === undefined) {
+                    } else if (!s[1]) {
 
-                        m.channel.send(new Discord.RichEmbed().setTitle(g(`command.help.title`)).setAuthor(`@${m.author.tag}`, m.author.avatarURL).setDescription(g(`command.help.tip`)).addField(g(`command.help.category.bot`), `\`help\` \`ping\` \`invite\``, true).addField(g(`command.help.category.util`), `\`qrcode\``, true).addField(g(`command.help.category.security`), `\`scan\``, true).addField(g(`command.help.category.shorturl`), `\`bitly\``, true).addField(g(`command.help.category.develop`), `\`eval\` \`testmode\``, true).setColor(`#7289da`));
+                        m.channel.send(
+                            new Discord.RichEmbed()
+                                .setTitle(g(`command.help.title`))
+                                .setAuthor(`@${m.author.tag}`, m.author.avatarURL)
+                                .setDescription(g(`command.help.tip`))
+                                .addField(g(`command.help.category.bot`), `\`help\` \`ping\` \`invite\``, true)
+                                .addField(g(`command.help.category.guild`), `\`guild\` \`url2emoji\``, true)
+                                .addField(g(`command.help.category.guild`), `\`me\` \`server\``, true)
+                                .addField(g(`command.help.category.util`), `\`qrcode\``, true)
+                                .addField(g(`command.help.category.security`), `\`scan\``, true)
+                                .addField(g(`command.help.category.shorturl`), `\`bitly\``, true)
+                                .addField(g(`command.help.category.develop`), `\`eval\` \`testmode\``, true)
+                                .setColor(`#7289da`));
 
                     }
 
@@ -215,19 +253,19 @@ Client.on(`ready`, () => {
 
                             } else {
 
-                                Message.send(m, g(`error.msg.7`));
+                                Message.send(m, g(`command.qrcode.error3`));
 
                             }
 
                         } else {
 
-                            Message.send(m, g(`error.msg.6`));
+                            Message.send(m, g(`command.qrcode.error2`));
 
                         }
 
                     } else {
 
-                        Message.send(m, g(`error.msg.5`));
+                        Message.send(m, g(`command.qrcode.error`));
 
                     }
 
@@ -241,7 +279,7 @@ Client.on(`ready`, () => {
 
                         if (m.content.slice(s[0].length + 2).length <= 14) {
 
-                            Message.send(m, g(`error.msg.3`), m.content.slice(s[0].length + 2));
+                            Message.send(m, g(`command.bitly.error3`), m.content.slice(s[0].length + 2));
 
                         } else {
 
@@ -280,13 +318,13 @@ Client.on(`ready`, () => {
                                         if (b.status_txt === `INVALID_ARG_ACCESS_TOKEN`) {
 
                                             Problem.Record(`Request - Bitly`, Problem.Invalid, g(`log.acc`), CallStack());
-                                            Message.send(m, g(`error.msg.zero`), `${g(`error.code`) + b.status_code}\n${g(`error.content`) + b.status_txt}\n${g(`error.result`) + b.data}\nJSON${g(`error.json`) + JSON.stringify(b)}`);
+                                            Message.send(m, g(`error.message.unknown`), `${g(`error.code`) + b.status_code}\n${g(`error.content`) + b.status_txt}\n${g(`error.result`) + b.data}\nJSON${g(`error.json`) + JSON.stringify(b)}`);
                                             console.log(`${g(`log.error`)} ${b}`);
 
                                         }
                                         if (b.status_txt === `INVALID_URI`) {
 
-                                            Message.send(m, g(`error.msg.2`, m.content.slice(s[0].length + 2)));
+                                            Message.send(m, g(`command.bitly.error2`, m.content.slice(s[0].length + 2)));
 
                                         }
 
@@ -316,7 +354,7 @@ Client.on(`ready`, () => {
 
                     } else {
 
-                        Message.send(m, g(`error.msg.1`));
+                        Message.send(m, g(`command.bitly.error`));
 
                     }
 
@@ -373,7 +411,7 @@ Client.on(`ready`, () => {
 
                                 } else {
 
-                                    m.author.send(new Discord.RichEmbed().setTitle(g(`command.scan.result`)).setDescription(`URL: ${m.content.slice(s[0].length + 2)}\n${g(`error.msg.8`)}`).setAuthor(`@${m.author.tag}`, m.author.avatarURL).addField(`Google Safebrowsing`, body.matches === undefined ? g(`command.scan.n`) : body.matches[0].threatType === `MALWARE` ? g(`command.scan.m`) : body.matches[0].threatType === `SOCIAL_ENGINEERING` ? g(`command.scan.p`) : `不明`, true).setFooter(`Powered By Google Safebrowsing | https://safebrowsing.google.com`, `https://developers.google.com/safe-browsing/images/SafeBrowsing_Icon.png`).setColor(`#7289da`));
+                                    m.author.send(new Discord.RichEmbed().setTitle(g(`command.scan.result`)).setDescription(`URL: ${m.content.slice(s[0].length + 2)}\n${g(`command.scan.error2`)}`).setAuthor(`@${m.author.tag}`, m.author.avatarURL).addField(`Google Safebrowsing`, body.matches === undefined ? g(`command.scan.n`) : body.matches[0].threatType === `MALWARE` ? g(`command.scan.m`) : body.matches[0].threatType === `SOCIAL_ENGINEERING` ? g(`command.scan.p`) : `不明`, true).setFooter(`Powered By Google Safebrowsing | https://safebrowsing.google.com`, `https://developers.google.com/safe-browsing/images/SafeBrowsing_Icon.png`).setColor(`#7289da`));
 
                                 }
 
@@ -383,7 +421,7 @@ Client.on(`ready`, () => {
 
                     } else {
 
-                        Message.send(m, g(`error.msg.9`));
+                        Message.send(m, g(`command.scan.error`));
 
                     }
 
@@ -399,20 +437,20 @@ Client.on(`ready`, () => {
 
                             } catch (e) {
 
-                                Message.send(m, g(`error.msg.12`, m.author));
+                                Message.send(m, g(`command.eval.error`, m.author));
                                 m.author.send(`${g(`command.eval.stacktrace`)}\n${e.stack}`);
 
                             }
 
                         } else {
 
-                            Message.send(m, g(`error.msg.10`));
+                            Message.send(m, g(`command.eval.error2`));
 
                         }
 
                     } else {
 
-                        Message.send(m, g(`error.msg.11`));
+                        Message.send(m, g(`error.developer`));
 
                     }
 
@@ -480,7 +518,39 @@ Client.on(`ready`, () => {
 
                     } else {
 
-                        Message.send(m, g(`error.msg.11`));
+                        Message.send(m, g(`error.developer`));
+
+                    }
+
+                } else if (s[0] === `url2emoji`) {
+
+                    if (is.Admin(m)) {
+
+                        if (m.content.slice(s[0].length + 2)) {
+
+                            if (m.content.slice(s[0].length + 2).split(`/`)[m.content.slice(s[0].length + 2).split(`/`).length - 1].endsWith(`.png`) ||
+                                m.content.slice(s[0].length + 2).split(`/`)[m.content.slice(s[0].length + 2).split(`/`).length - 1].endsWith(`.jpg`) ||
+                                m.content.slice(s[0].length + 2).split(`/`)[m.content.slice(s[0].length + 2).split(`/`).length - 1].endsWith(`.jpeg`) ||
+                                m.content.slice(s[0].length + 2).split(`/`)[m.content.slice(s[0].length + 2).split(`/`).length - 1].endsWith(`.gif`)) {
+
+                                m.guild.createEmoji(m.content.slice(s[0].length + 2), m.content.slice(s[0].length + 2).split(`/`)[m.content.slice(s[0].length + 2).split(`/`).length - 1].replace(`.png`, ``).replace(`.jpg`, ``).replace(`.jpeg`, ``).replace(`gif`, ``))
+                                    .then((e) => Message.send(m, g(`command.url2emoji.success`, e, e.name)));
+
+                            } else {
+
+                                Message.send(m, g(`command.url2emoji.error2`));
+
+                            }
+
+                        } else {
+
+                            Message.send(m, g(`command.url2emoji.error`));
+
+                        }
+
+                    } else {
+
+                        Message.send(m, g(`error.admin`));
 
                     }
 
@@ -527,7 +597,7 @@ Client.on(`ready`, () => {
 
         } catch (e) {
 
-            Message.send(r.message, g(`error.msg.12`, u));
+            Message.send(r.message, g(`command.eval.error`, u));
             u.send(`${g(`command.eval.stacktrace`)}\n${e.stack}`);
 
         }
