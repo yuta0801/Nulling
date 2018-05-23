@@ -1,0 +1,52 @@
+{
+    "config": {
+        "language": "ja_jp",
+        "prefix": "-"
+    },
+    "profile": {
+        "avatarurl": false,
+        "email": false,
+        "username": false,
+        "crypto": {
+            "bitcoin": false,
+            "bitcoincash": false,
+            "bitcoingold": false,
+            "bitconnect": false,
+            "bytecoin": false,
+            "dash": false,
+            "dogecoin": false,
+            "eos": false,
+            "ethereum": false,
+            "etherumclassic": false,
+            "golem": false,
+            "lisk": false,
+            "litecoin": false,
+            "monacoin": false,
+            "monero": false,
+            "ripple": false,
+            "sprouts": false,
+            "tron": false,
+            "xem": false
+        },
+        "social": {
+            "bilibili": false,
+            "facebook": false,
+            "github": false,
+            "instagram": false,
+            "lol": false,
+            "minecraft_java": false,
+            "niconico": false,
+            "openrec": false,
+            "psn": false,
+            "reddit": false,
+            "skype": false,
+            "spotify": false,
+            "steam": false,
+            "twitch": false,
+            "twitter": false,
+            "xbox": false,
+            "youtube": false,
+            "virustotal": false
+        }
+    }
+}
