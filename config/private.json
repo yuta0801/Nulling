@@ -2,5 +2,6 @@
     "Discord": "Discord のボットトークン",
     "Bitly": "Bit.ly の API キー",
     "Google": "Google Developer の API キー",
-    "VirusTotal": "Virus Total の Public API キー"
+    "VirusTotal": "Virus Total の Public API キー",
+    "Docomo": "Docomo Developer アプリケーションの API キー"
 }
